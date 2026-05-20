@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         oklch(9% 0.008 240);
+    --surface:    oklch(13% 0.007 240);
+    --border:     oklch(20% 0.007 240);
+    --border-h:   oklch(30% 0.007 240);
+    --divider:    oklch(18% 0.006 240);
+    --text:       oklch(92% 0.006 240);
+    --text-2:     oklch(72% 0.007 240);
+    --text-3:     oklch(50% 0.007 240);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px 28px 48px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .header-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  .header-meta {
+    font-size: 12px;
+    color: var(--text-2);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .btc-price {
+    color: oklch(73% 0.14 55);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .btc-change { font-size: 11px; color: oklch(60% 0.18 25); }
+
+  /* ── Section label ── */
+  .section-heading {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 14px;
+  }
+
+  /* ── Grids ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px 18px;
+    transition: border-color 180ms ease-out;
+  }
+  .card:hover { border-color: var(--border-h); }
+
+  .card-label {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  /* ── News items ── */
+  .item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 0 10px;
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .item-n {
+    font-size: 10px;
+    font-weight: 600;
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.6;
+  }
+
+  .item-body h3 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+  .item-body h3 a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 150ms ease-out;
+  }
+  .item-body h3 a:hover { color: oklch(80% 0.008 240); }
+
+  .item-body p {
+    font-size: 11.5px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .item-src {
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.1px;
+  }
+
+  /* ── Copa schedule ── */
+  .schedule {
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--divider);
+    padding-bottom: 14px;
+  }
+  .match {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 12px;
+  }
+  .match-date-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-3);
+    min-width: 38px;
+    padding-top: 1px;
+  }
+  .match-teams {
+    color: var(--text-2);
+    font-size: 12px;
+    flex: 1;
+  }
+  .match-venue {
+    font-size: 10px;
+    color: var(--text-3);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .match.next .match-teams {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .match.next .match-date-badge {
+    color: oklch(62% 0.15 142);
+  }
+  .next-pill {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: oklch(62% 0.15 142);
+    background: oklch(18% 0.06 142);
+    padding: 1px 5px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  /* ── Spacing ── */
+  .world-section { margin-top: 28px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-title">News Dashboard</span>
+  <div class="header-meta">
+    <span>19 May 2026, 21:07</span>
+    <span>BTC <span class="btc-price">$76,790</span> <span class="btc-change">-0.27%</span></span>
+  </div>
+</header>
+
+<div class="section-heading">Tech &amp; Carreira</div>
+<div class="grid-2">
+<div class="card">
+  <div class="card-label" style="background:oklch(23% 0.08 145);color:oklch(74% 0.16 145)">Data Engineering</div>
+  
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.12 145)">01</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNSGxKSzdzNkQ1VE9XS2YtZWF1YnJfc1VxcUdQUGNlV2Y5UDhnZmE3cFljcWstT1ZoajlSY1lITjRvUmd5aU5FcDJEMjBNYU1DZkxfRUlWY29hVTFlbUhpclF1TU5BMEVLeG1QVV9ZM0JzOG02enRBd1llTW8xMHVrVURWWGptR2R2RDh4bzVWeFJVSlZhTHFfSm1EekpkNEE2UG1QeDIwNkdHQVBH?oc=5" target="_blank">Modular ETL with Airflow and dbt: Clean Pipelines at Scale</a></h3>
+        
+        <span class="item-src">DataDrivenInvestor</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.12 145)">02</span>
+      <div class="item-body">
+        <h3><a href="https://thenewstack.io/andrej-karpathy-anthropic-pretraining/" target="_blank">Anthropic hires OpenAI co-founder Andrej Karpathy to lead Claude pre-training research</a></h3>
+        <p>Anthropic scored a major hire today. Former Tesla senior director and OpenAI founding member Andrej Karpathy is joining the organization</p>
+        <span class="item-src">The New Stack</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.12 145)">03</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPRG1TaFE5SDEwbmFFQ1JHX05pOGRNaEJOV25uQzAxOGdRU0s3VThIcDgzeE8wVWk4cUhXWlp1Um96cXNSWFRzb2ZXMk00MkJ5LVhXNWtzUU5YRVdESnVUZ2VJZEM0dXF2Ri1JMmFHQlctT3RHcTNLWnp2REU2Q3lHM2k0dVJTUzZRT2VTYzdwSkJuenZiVFQxcm56RWV4WTFVYXkwSU5LYk5yZlQ2VHJha1BiTFVrM3QwSXExcXljcw?oc=5" target="_blank">4 YAML Files Instead of PySpark: How We Let Analysts Build Data Pipelines Without Engineers</a></h3>
+        
+        <span class="item-src">towardsdatascience.com</span>
+      </div>
+    </div>
+</div><div class="card">
+  <div class="card-label" style="background:oklch(20% 0.07 260);color:oklch(74% 0.14 260)">AI / LLM</div>
+  
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.10 260)">01</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTFBmbW90N2ZqVHhsUmNMVTkweTRuT2M4eEhpNGxqRjZZcmFzUl9LX18zNzQtVFBWLV9GSnRoWXVoWFhwZ3BzZnRsSDVRZHpqVmJDblA3VUZGNTJxMFpCTHFkSUV2RHdNeVpkZ0NQVXU1VlZkd2s?oc=5" target="_blank">Anthropic Finds 22 Firefox Vulnerabilities Using Claude Opus 4.6 AI Model</a></h3>
+        
+        <span class="item-src">The Hacker News</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.10 260)">02</span>
+      <div class="item-body">
+        <h3><a href="https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/" target="_blank">With Gemini 3.5 Flash, Google bets its next AI wave on agents, not chatbots</a></h3>
+        <p>Google launched Gemini 3.5 Flash, its most powerful coding and agentic AI model yet, at the company's annual developer conference. It is capable of autonomously executing complex tasks and building software from scratch.</p>
+        <span class="item-src">TechCrunch</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(58% 0.10 260)">03</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ?oc=5" target="_blank">China's DeepSeek releases preview of long-awaited V4 model as AI race intensifies</a></h3>
+        
+        <span class="item-src">CNBC</span>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="world-section">
+  <div class="section-heading">Mundo</div>
+  <div class="grid-4">
+<div class="card">
+  <div class="card-label" style="background:oklch(23% 0.08 55);color:oklch(76% 0.15 55)">BTC / Crypto</div>
+  
+    <div class="item">
+      <span class="item-n" style="color:oklch(60% 0.12 55)">01</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPMnlPdDc5UjhXYUdoVmtCNlFCWXZRemRDbWVabXRNMDIxR1RNcVpoc1ZCY2tTUmh4VXVFaVZUeDEwU18xdFB5MmFVUWFNdGYycWJUM253cUdFcG9kNHhRYUhKOTJaM1Fad1R0NjhHYVFncHE0VnNEbWUtRGI4YkxEazZXZHg2eGhqVjRwaWM0Q2c1ejJxWW9KZWl6elIxUy1VcmJVQWljejkwRUY4V1E?oc=5" target="_blank">Iran unveils Bitcoin-backed shipping insurance plan for Hormuz -reports (BTC-USD:Cryptocurrency)</a></h3>
+        
+        <span class="item-src">Seeking Alpha</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(60% 0.12 55)">02</span>
+      <div class="item-body">
+        <h3><a href="https://cointelegraph.com/markets/bitcoin-traders-may-look-for-deeper-pullback-zones?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank">Data shows Bitcoin dip buyers waiting for lower prices: Is $70K BTC’s next stop?</a></h3>
+        <p>Bitcoin futures and orderbook data show dip buyers waiting for a BTC price drop below $70,000.</p>
+        <span class="item-src">CoinTelegraph</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(60% 0.12 55)">03</span>
+      <div class="item-body">
+        <h3><a href="https://cointelegraph.com/news/bernstein-bitcoin-miners-gain-strategic-role-in-ai-infrastructure?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank">Bernstein: Bitcoin miners becoming critical suppliers in AI infrastructure</a></h3>
+        <p>Bernstein says miners control 27 GW of planned power and $90 billion in AI deals, giving them a strategic edge as electricity becomes the main constraint on data center growth.</p>
+        <span class="item-src">CoinTelegraph</span>
+      </div>
+    </div>
+</div><div class="card">
+  <div class="card-label" style="background:oklch(20% 0.07 195);color:oklch(72% 0.14 195)">Financeiro</div>
+  
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.10 195)">01</span>
+      <div class="item-body">
+        <h3><a href="https://www.cnbc.com/2026/05/19/treasurys-yields-inflation-traders-fed-interest-rates.html" target="_blank">30-year Treasury yield tops 5.19%, highest since before the financial crisis</a></h3>
+        <p>Global bond markets remained on edge as traders monitored central bank responses to renewed inflation fears.</p>
+        <span class="item-src">CNBC</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.10 195)">02</span>
+      <div class="item-body">
+        <h3><a href="https://www.marketwatch.com/story/powell-says-labor-market-not-a-source-of-significant-inflation-pressure-cc3b1297?mod=mw_rss_realtimeheadlines" target="_blank">Powell says labor market not a source of significant inflation pressure</a></h3>
+        
+        <span class="item-src">MarketWatch</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.10 195)">03</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNa01ySHJvR2J4d3NQamJPR1dlaERiMlZTdkNuNThXZFB3dDYwNTltZVdacjhuaDgwV3Y2ZkZPTGx6QnVWWFhMWHVMQjNib09ld21xLWw4ZUxXQk50WFg2MHRWQ2JRLVg3MUgyRW54dGRyOHlSd2dWTmJfUENocV9oaUpYbHpGR0nSAYwBQVVfeXFMT0lCSDJWeHZQSC1XTFBkVDlRclNDdGY2TkQwOUNBWkU3Wkc1OVFzMFVWb2llZENELWYxejhhU3VvSzFQOXZseDNlalFKNnBuVkg4Vi1UZkxmeGI5bFgwQW5MeExRd0ktMHlHaVZ3YzJBeEtlMWRlTXc4bGotdVRWc0s2anJNVEpKYi1ZTTY?oc=5" target="_blank">Eleições presidenciais e a Bolsa de Valores: volatilidade não irá faltar</a></h3>
+        
+        <span class="item-src">Estadão</span>
+      </div>
+    </div>
+</div><div class="card">
+  <div class="card-label" style="background:oklch(22% 0.09 25);color:oklch(72% 0.17 25)">Carros</div>
+  
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 25)">01</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE8wYXdPNEZCdHgwWGxXbDh2akwwOV90VDlLWUVKOGxyMHY1NDI1bk9ULWRadzNMYmtreWhYcE9pNnFRcHUxNkI5dHRXTmsxOU13cXpXRVRhNlNnVGR4QXVDVWlDdVQtNzZfNG9YMjFFN19iMVU?oc=5" target="_blank">A Guide to Every EV for Sale in the U.S. for 2026, from SUVs to Sports Cars and Trucks</a></h3>
+        
+        <span class="item-src">Car and Driver</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 25)">02</span>
+      <div class="item-body">
+        <h3><a href="https://www.motor1.com/news/796242/bmw-1-series-electric-rear-wheel-drive/" target="_blank">BMW's Smallest Car Will Be Rear-Wheel Drive Again</a></h3>
+        <p>But this time around, it won't have a combustion engine.</p>
+        <span class="item-src">Motor1</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 25)">03</span>
+      <div class="item-body">
+        <h3><a href="https://www.motor1.com/news/796355/hyundai-fake-manual-transmission-patent/" target="_blank">Hyundai's Next Performance EV Could Have A Manual</a></h3>
+        <p>Hyundai has filed a patent for a new shift mechanism that can operate as like a traditional automatic transmission or a manual.</p>
+        <span class="item-src">Motor1</span>
+      </div>
+    </div>
+</div><div class="card">
+  <div class="card-label" style="background:oklch(22% 0.09 142);color:oklch(72% 0.17 142)">Copa do Mundo 2026</div>
+  <div class="schedule"><div class="match next"><span class="match-date-badge">13 Jun</span><span class="match-teams">Brasil vs Marrocos<span class="next-pill">Próximo</span></span><span class="match-venue">Los Angeles</span></div><div class="match"><span class="match-date-badge">17 Jun</span><span class="match-teams">Brasil vs Haiti</span><span class="match-venue">Dallas</span></div><div class="match"><span class="match-date-badge">21 Jun</span><span class="match-teams">Brasil vs Escócia</span><span class="match-venue">Atlanta</span></div></div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 142)">01</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxObS1RUGJKQjZtVGxlbWxETWtYTTRkTVdlR0NTXy1VYTdoSHVRNE9zX0gyZUpVaUx5VEtCRWM5amdMQUxXSEl3NGtsM1Aya0FMb2h6Zy04bF9sTEpoWjFBZ1hnaTlBcnI1V0g5ZXhhWHNfMndRUC11eUdYSXA2N1h0WGc1V3pWTmRiWU55aUowOVJrQ1RydTlSaEJ5STJqVkxiUVdzeG12azExazRMel9BWlc2MTFfcVFSeXBNTF9jLXdnU1pRUkotdXpZaGJnTzFpalNjcXVwR0FIYllMblJEM3NrV3ZtaU04?oc=5" target="_blank">Convocação da Seleção Brasileira para Copa do Mundo: lista de Ancelotti tem Neymar, Endrick e Rayan</a></h3>
+        
+        <span class="item-src">ESPN Brasil</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 142)">02</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxOWkQ5Z1VTSEpYNmtXTFJ3UFhjZC05UDZUSnBpZFNRcWp3aS1XUUNQWkpUMWRUaGw4NnM1UVFra2hJcXpDdDBxQWxncXloTlFLdnVmVGhRRHlvQkJidjVHenJQaWw2WmZUU3gtc0JDV25fRl9ZTHU5eWNUSEl6UmlrdGhkN2xKTzhYeDNDV1FVMTRUOHVwblRCM2hhMktYOVJUMWxBbDdLaFViWUNqVUMwLWpUUjhJd3ZQTkVQT1JHdFRYemVPWTZ0SlBLaks4YlVTczlJNmxiWjZoMG5JaGx5SV9hdGE1dFXSAfYBQVVfeXFMTmNSOHRueU1ZX0JiRVN4NU1Tb2w3dHd4WC1nWk1lbExFWFgyUGd6Z251Sk9ieENmWVFkZk16bU55RGkzbEVhMUFMOGk5ZWxfcWRCVWpDemNGZ3Badzg4T1F2Vk5ISGVRYkZXZXdzZDlVVS16alVuSVJvX0NTWTZuaUI2NFpPazBHaTcxZGI1dGxoWERkTG1tdzlyWUJ2bU5ldDZLSWpzZFhtb1NrdGVGWFNtR01zMUFZNU1qa3ZGT0wwRmNxeUhsLXFxMVJKazJCRzRrMGUyN19GX3ZzVXNCTGJjdVViVDRJVEpLbEFJT2NnaHNmTEJ3?oc=5" target="_blank">Convocados da Seleção para a Copa do Mundo: veja lista de Ancelotti</a></h3>
+        
+        <span class="item-src">ge</span>
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-n" style="color:oklch(56% 0.13 142)">03</span>
+      <div class="item-body">
+        <h3><a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxPMjAxQ3I4R1lKTnhnTHBnbDlLa1BBVTJwbHg5Z3lGa1hUbUZCaTZwUTRDSUpna09qRC1taGpvWFVsVDNueTFMRzVtSjhkbmZaa3QtWDV3dEh0eUFOX1BfcWV4eDNROGI2S2Q3VGVhY1BHQXVGWEJBblhMb0RKUUdFZTc1TnJHOFhfQzZHdzR6NURUS25rRTZ2ejJZWlJSLThWcXlvaHJteEM1Rm5iYldBc0VtS0wtdXdIRnJWYkV2WlRJT3RVclBYaXhKcnZ3MXpDdWhDSkNOX09YenVsOEdMMTNSV1c?oc=5" target="_blank">Milhões de brasileiros vão viajar para a Copa do Mundo 2026; confira dados da pesquisa</a></h3>
+        
+        <span class="item-src">JC</span>
+      </div>
+    </div>
+</div>
+  </div>
+</div>
+
+</body>
+</html>

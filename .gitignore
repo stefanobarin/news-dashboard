@@ -1,3 +1,5 @@
+news_generator.py
 news-dash.log
 __pycache__/
 *.pyc
+.git_askpass.sh

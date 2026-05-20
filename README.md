@@ -1,7 +1,7 @@
 # News Dashboard
 
 Personal news dashboard auto-generated twice daily. Covers tech, AI, crypto, finance, cars, and football.
-
+assuntos de interesse. 
 **Live:** https://stefanobarin.github.io/news-dashboard/
 
 ---
@@ -41,4 +41,4 @@ A Python script fetches RSS feeds across 6 categories, grabs a live BTC price, a
             └── git push → GitHub Pages
 ```
 
-The generator script is not in this repo. Only the generated `index.html` is published here.
+The generator script is just local on mac 

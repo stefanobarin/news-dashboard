@@ -28,7 +28,6 @@
     line-height: 1.5;
   }
 
-  /* ── Header ── */
   header {
     display: flex;
     justify-content: space-between;
@@ -37,176 +36,57 @@
     margin-bottom: 28px;
     border-bottom: 1px solid var(--divider);
   }
-  .header-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.2px;
-  }
-  .header-meta {
-    font-size: 12px;
-    color: var(--text-2);
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-  .btc-price {
-    color: oklch(73% 0.14 55);
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .btc-change { font-size: 11px; color: oklch(60% 0.18 25); }
+  .header-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.2px; }
+  .header-meta  { font-size: 12px; color: var(--text-2); display: flex; align-items: baseline; gap: 10px; }
+  .btc-price    { color: oklch(73% 0.14 55); font-weight: 600; font-size: 13px; }
+  .btc-change   { font-size: 11px; color: oklch(60% 0.18 25); }
 
-  /* ── Section label ── */
   .section-heading {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--text-3);
-    margin-bottom: 14px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.8px;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 14px;
   }
 
-  /* ── Grids ── */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-  /* ── Card ── */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 18px 18px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 18px 18px;
     transition: border-color 180ms ease-out;
   }
   .card:hover { border-color: var(--border-h); }
 
   .card-label {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border-radius: 3px;
-    margin-bottom: 16px;
+    display: inline-block; font-size: 9px; font-weight: 700;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px; margin-bottom: 14px;
   }
 
-  /* ── News items ── */
-  .item {
-    display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: 0 10px;
-    padding-bottom: 13px;
-    margin-bottom: 13px;
-    border-bottom: 1px solid var(--divider);
-  }
-  .item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .item { display: flex; gap: 10px; padding: 9px 0; border-top: 1px solid var(--divider); }
+  .item:first-of-type { border-top: none; }
+  .item-n { font-size: 11px; font-weight: 700; min-width: 18px; padding-top: 1px; }
+  .item-body { flex: 1; min-width: 0; }
+  .item-body h3 { font-size: 12.5px; font-weight: 500; line-height: 1.45; margin-bottom: 3px; }
+  .item-body h3 a { color: var(--text); text-decoration: none; }
+  .item-body h3 a:hover { color: oklch(85% 0.08 240); }
+  .item-body p { font-size: 11.5px; color: var(--text-2); line-height: 1.4; margin-bottom: 3px;
+                 display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .item-src { font-size: 10.5px; color: var(--text-3); }
 
-  .item-n {
-    font-size: 10px;
-    font-weight: 600;
-    padding-top: 2px;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.6;
-  }
+  .schedule { margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .match { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-2); }
+  .match.next { color: var(--text); }
+  .match-date-badge { font-size: 10px; font-weight: 700; color: var(--text-3); min-width: 38px; }
+  .match-teams { flex: 1; display: flex; align-items: center; gap: 6px; }
+  .match-venue { font-size: 10px; color: var(--text-3); }
+  .next-pill { font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+               background: oklch(22% 0.09 142); color: oklch(72% 0.17 142);
+               padding: 1px 5px; border-radius: 3px; }
 
-  .item-body h3 {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 5px;
-  }
-  .item-body h3 a {
-    color: var(--text);
-    text-decoration: none;
-    transition: color 150ms ease-out;
-  }
-  .item-body h3 a:hover { color: oklch(80% 0.008 240); }
-
-  .item-body p {
-    font-size: 11.5px;
-    color: var(--text-2);
-    line-height: 1.55;
-    margin-bottom: 6px;
-  }
-  .item-src {
-    font-size: 10.5px;
-    color: var(--text-3);
-    letter-spacing: 0.1px;
-  }
-
-  /* ── Copa schedule ── */
-  .schedule {
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--divider);
-    padding-bottom: 14px;
-  }
-  .match {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding: 5px 0;
-    font-size: 12px;
-  }
-  .match-date-badge {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--text-3);
-    min-width: 38px;
-    padding-top: 1px;
-  }
-  .match-teams {
-    color: var(--text-2);
-    font-size: 12px;
-    flex: 1;
-  }
-  .match-venue {
-    font-size: 10px;
-    color: var(--text-3);
-    text-align: right;
-    white-space: nowrap;
-  }
-  .match.next .match-teams {
-    color: var(--text);
-    font-weight: 600;
-  }
-  .match.next .match-date-badge {
-    color: oklch(62% 0.15 142);
-  }
-  .next-pill {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    color: oklch(62% 0.15 142);
-    background: oklch(18% 0.06 142);
-    padding: 1px 5px;
-    border-radius: 2px;
-    vertical-align: middle;
-    margin-left: 5px;
-  }
-
-  /* ── Spacing ── */
   .world-section { margin-top: 28px; }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .grid-2, .grid-4 { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .grid-2, .grid-4 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -214,8 +94,8 @@
 <header>
   <span class="header-title">News Dashboard</span>
   <div class="header-meta">
-    <span>19 May 2026, 21:15</span>
-    <span>BTC <span class="btc-price">$76,525</span> <span class="btc-change">-0.71%</span></span>
+    <span>20 May 2026, 20:20</span>
+    <span>BTC <span class="btc-price">$77,346</span> <span class="btc-change" style="color:oklch(65% 0.18 145)">+0.73%</span></span>
   </div>
 </header>
 
@@ -227,25 +107,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.12 145)">01</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNSGxKSzdzNkQ1VE9XS2YtZWF1YnJfc1VxcUdQUGNlV2Y5UDhnZmE3cFljcWstT1ZoajlSY1lITjRvUmd5aU5FcDJEMjBNYU1DZkxfRUlWY29hVTFlbUhpclF1TU5BMEVLeG1QVV9ZM0JzOG02enRBd1llTW8xMHVrVURWWGptR2R2RDh4bzVWeFJVSlZhTHFfSm1EekpkNEE2UG1QeDIwNkdHQVBH?oc=5" target="_blank">Modular ETL with Airflow and dbt: Clean Pipelines at Scale</a></h3>
-        
-        <span class="item-src">DataDrivenInvestor</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxPM3dWbVdUVFJRelc5QXdqWW9ZREc0U2JvUjJMWUxySkhRXzhoOTQtWUExWlh6dDVwV18zV25ETGJ3OXVTMWQxNEJiQlZtZDc0UU9PZWNHT2c5NXdBYmZQQzZ6WlV1M2ltZW9NZ2VxVzAySWVMVzduMVc5TWpTN19nYmZEV0NWNHBTNzR2WjZKZG5YSHFUWGZVS3V3Vzk2c0NtTWlQVC1vUjNKajBHQTl2WU1QNA?oc=5" target="_blank">Spark Declarative Pipelines: Why Data Engineering Needs to Become End-to-End Declarative - Databricks</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMiswFBVV95cUxPM3dWbVdUVFJRelc5QXdqWW9ZREc0U2JvUjJMWUxySkhRXzhoOTQtWUExWlh6dDVwV18zV25ETGJ3OXVTMWQxNEJiQlZtZDc0UU9PZWNHT2c5NXdBYmZQQzZ6WlV1M2ltZW9NZ2VxVzAySWVMVzduMVc5TWpTN19nYmZEV0NWNHBTNzR2WjZKZG5YSHFUWGZVS3V3Vzk2c0NtTWlQVC1vUjNKajBHQTl2WU1QNA?oc=5&quot; target=&quot;_blank&quot;&gt;Spark Declarative Pipelines: Why Data Engineering Needs to Become End-to-End Declarative&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;Databricks&lt;/font&gt;</p>
+        <span class="item-src">Databricks</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.12 145)">02</span>
       <div class="item-body">
-        <h3><a href="https://thenewstack.io/andrej-karpathy-anthropic-pretraining/" target="_blank">Anthropic hires OpenAI co-founder Andrej Karpathy to lead Claude pre-training research</a></h3>
-        <p>Anthropic scored a major hire today. Former Tesla senior director and OpenAI founding member Andrej Karpathy is joining the organization</p>
-        <span class="item-src">The New Stack</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNSGxKSzdzNkQ1VE9XS2YtZWF1YnJfc1VxcUdQUGNlV2Y5UDhnZmE3cFljcWstT1ZoajlSY1lITjRvUmd5aU5FcDJEMjBNYU1DZkxfRUlWY29hVTFlbUhpclF1TU5BMEVLeG1QVV9ZM0JzOG02enRBd1llTW8xMHVrVURWWGptR2R2RDh4bzVWeFJVSlZhTHFfSm1EekpkNEE2UG1QeDIwNkdHQVBH?oc=5" target="_blank">Modular ETL with Airflow and dbt: Clean Pipelines at Scale - DataDrivenInvestor</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMirAFBVV95cUxNSGxKSzdzNkQ1VE9XS2YtZWF1YnJfc1VxcUdQUGNlV2Y5UDhnZmE3cFljcWstT1ZoajlSY1lITjRvUmd5aU5FcDJEMjBNYU1DZkxfRUlWY29hVTFlbUhpclF1TU5BMEVLeG1QVV9ZM0JzOG02enRBd1llTW8xMHVrVURWWGptR2R2RDh4bzVWeFJVSlZhTHFfSm1EekpkNEE2UG1QeDIwNkdHQVBH?oc=5&quot; target=&quot;_blank&quot;&gt;Modular ETL with Airflow and dbt: Clean Pipelines at Scale&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;DataDrivenInvestor&lt;/font&gt;</p>
+        <span class="item-src">DataDrivenInvestor</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.12 145)">03</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPRG1TaFE5SDEwbmFFQ1JHX05pOGRNaEJOV25uQzAxOGdRU0s3VThIcDgzeE8wVWk4cUhXWlp1Um96cXNSWFRzb2ZXMk00MkJ5LVhXNWtzUU5YRVdESnVUZ2VJZEM0dXF2Ri1JMmFHQlctT3RHcTNLWnp2REU2Q3lHM2k0dVJTUzZRT2VTYzdwSkJuenZiVFQxcm56RWV4WTFVYXkwSU5LYk5yZlQ2VHJha1BiTFVrM3QwSXExcXljcw?oc=5" target="_blank">4 YAML Files Instead of PySpark: How We Let Analysts Build Data Pipelines Without Engineers</a></h3>
-        
-        <span class="item-src">towardsdatascience.com</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPZVdCTUhGRjU1RDVzcVNfQk1WYUgwNkIwbTNZV05NNlhiY29VajdGSG5KY0RDUzBNamUxSVNPQTg4bFlxdjlTQzZqWkNLeGhwODBvSm43eWJsMko0dnJQYnJ6cm5UanF3VVdxOHZLLXJGdDdjcTN4NmRMMloxSDcwZmszSm5ZZk5xSDNpeg?oc=5" target="_blank">Modern Data Stack: which place for Spark ? - Towards Data Science</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMijAFBVV95cUxPZVdCTUhGRjU1RDVzcVNfQk1WYUgwNkIwbTNZV05NNlhiY29VajdGSG5KY0RDUzBNamUxSVNPQTg4bFlxdjlTQzZqWkNLeGhwODBvSm43eWJsMko0dnJQYnJ6cm5UanF3VVdxOHZLLXJGdDdjcTN4NmRMMloxSDcwZmszSm5ZZk5xSDNpeg?oc=5&quot; target=&quot;_blank&quot;&gt;Modern Data Stack: which place for Spark ?&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;Towards Data Science&lt;/font&gt;</p>
+        <span class="item-src">Towards Data Science</span>
       </div>
     </div>
 </div><div class="card">
@@ -254,25 +134,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.10 260)">01</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTFBmbW90N2ZqVHhsUmNMVTkweTRuT2M4eEhpNGxqRjZZcmFzUl9LX18zNzQtVFBWLV9GSnRoWXVoWFhwZ3BzZnRsSDVRZHpqVmJDblA3VUZGNTJxMFpCTHFkSUV2RHdNeVpkZ0NQVXU1VlZkd2s?oc=5" target="_blank">Anthropic Finds 22 Firefox Vulnerabilities Using Claude Opus 4.6 AI Model</a></h3>
-        
-        <span class="item-src">The Hacker News</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMiR0FVX3lxTE1qM1gzMGY0Y1BWM19EM3ItdjREVVRPNkEtRDNQaTFXZUp4dkJCNWwwYW85eHlId2dQcDN0aHZXdFlYSlpXeXNJ?oc=5" target="_blank">Cloud LLM vs Local LLMs: Examples &amp; Benefits - AIMultiple</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMiR0FVX3lxTE1qM1gzMGY0Y1BWM19EM3ItdjREVVRPNkEtRDNQaTFXZUp4dkJCNWwwYW85eHlId2dQcDN0aHZXdFlYSlpXeXNJ?oc=5&quot; target=&quot;_blank&quot;&gt;Cloud LLM vs Local LLMs: Examples &amp; Benefits&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;AIMultiple&lt;/font&gt;</p>
+        <span class="item-src">AIMultiple</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.10 260)">02</span>
       <div class="item-body">
-        <h3><a href="https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/" target="_blank">With Gemini 3.5 Flash, Google bets its next AI wave on agents, not chatbots</a></h3>
-        <p>Google launched Gemini 3.5 Flash, its most powerful coding and agentic AI model yet, at the company's annual developer conference. It is capable of autonomously executing complex tasks and building software from scratch.</p>
-        <span class="item-src">TechCrunch</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOYnJXX2REY05lcHZJd3M1MGlmMUMyWDBLbkZ0ODZMaVZqOGlCTkdLQ3RYX3NHbWtNZE83MFk1bUs0b2lfUVZENnJJSy1oeVA4QVZKM1JMRnBhTTVtLXVoR2pVMWt5NFZ4SzM1N3FwWW5ESEMtcDVSNzdUdFlUbGRjbE1aSjhOTDA?oc=5" target="_blank">Gemini Spark vs ChatGPT and Claude: Performance, Multimodality, Pricing, and Use-Case Comparison (2026 Guide) - Blockchain Council</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMihwFBVV95cUxOYnJXX2REY05lcHZJd3M1MGlmMUMyWDBLbkZ0ODZMaVZqOGlCTkdLQ3RYX3NHbWtNZE83MFk1bUs0b2lfUVZENnJJSy1oeVA4QVZKM1JMRnBhTTVtLXVoR2pVMWt5NFZ4SzM1N3FwWW5ESEMtcDVSNzdUdFlUbGRjbE1aSjhOTDA?oc=5&quot; target=&quot;_blank&quot;&gt;Gemini Spark vs ChatGPT and Claude: Performance, Multimodality, Pricing, and Use-Case Comparison (2026 Guide)&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;Blockchain Council&lt;/font&gt;</p>
+        <span class="item-src">Blockchain Council</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(58% 0.10 260)">03</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ?oc=5" target="_blank">China's DeepSeek releases preview of long-awaited V4 model as AI race intensifies</a></h3>
-        
-        <span class="item-src">CNBC</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPRGxiN1BxMk40c2ZKZWhTZERkajRfc2ltLWk5UWZ3bUM2Rlk3UkFLeEZVdVVDelc2OXJyWnRXMTNVRWo0TkNOVUNGY09vM2VPN0wzZHhKV2J6TU1tYmpJeGNhOWhtVVZGUFFhMmJNUjNQcnlxanJYTWM2dUFSUldfd3h4c21DUXoxaGNMRXMtNjRONUlGamVKNWYwbFdhSTQ?oc=5" target="_blank">Local LLMs have one advantage ChatGPT and Claude can’t match, and it&#x27;s why I&#x27;m switching - MakeUseOf</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMinwFBVV95cUxPRGxiN1BxMk40c2ZKZWhTZERkajRfc2ltLWk5UWZ3bUM2Rlk3UkFLeEZVdVVDelc2OXJyWnRXMTNVRWo0TkNOVUNGY09vM2VPN0wzZHhKV2J6TU1tYmpJeGNhOWhtVVZGUFFhMmJNUjNQcnlxanJYTWM2dUFSUldfd3h4c21DUXoxaGNMRXMtNjRONUlGamVKNWYwbFdhSTQ?oc=5&quot; target=&quot;_blank&quot;&gt;Local LLMs have one advantage ChatGPT and Claude can’t match, and it&#x27;s why I&#x27;m switching&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;MakeUseOf&lt;/font&gt;</p>
+        <span class="item-src">MakeUseOf</span>
       </div>
     </div>
 </div>
@@ -287,25 +167,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(60% 0.12 55)">01</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOaEYyeDNLTy1VN3p6dGZSS0lGSU9SbHZId09kM1ZGWWRWY2NFRzR4aWNjYnRtSzYzSFQ0eUZrQW94UHg5TnRJOWJJbWxpcU1ES1lrdkpySG4xVHR0azFBVnRHMTA5ZlZiLW8zV0Y4RVZiZ1g2THJ1cTR3cEdSdk1HV1Zac1o2RlktMGRpVWE0UWJiMWZQSTlad0c3N3ZGT2ZHc3Z2S1BuMHNMOU50V0U4NFc1OGJ3bW4tNVdsUUpRT0JBQQ?oc=5" target="_blank">Why is crypto up today: bitcoin (BTC) hits $82,000, Coinbase gains as Clarity Act advances</a></h3>
-        
-        <span class="item-src">CoinDesk</span>
+        <h3><a href="https://cointelegraph.com/markets/bitcoin-coinbase-premium-slidse-to-six-week-lows-but-there-is-a-silver-lining?utm_source=rss_feed&amp;utm_medium=rss&amp;utm_campaign=rss_partner_inbound" target="_blank">Key Bitcoin price metric used by bulls falls to six-week low, but there’s a silver lining</a></h3>
+        <p>&lt;p style=&quot;float:right; margin:0 0 10px 15px; width:240px;&quot;&gt;&lt;img src=&quot;https://images.cointelegraph.com/images/528_aHR0cHM6Ly9zMy1pbWFnZXMuY3RtZWRpYS5pby9tZWRpYS9hcnRpY2xlLWNvdmVycy9oaS1jcnlwdG9jdXJyZW5jeS12cy1zdG9ja3MtY29pbmJhc2UtYml0Y29pbjIuanBn.jpg&quot; alt=&quot;Key Bitcoin price metric used by bulls falls to six-week low, but there’s a silver lining&quot; class=&quot;type:primaryImage&quot;&gt;&lt;/p&gt;&lt;p&gt;Profit-taking by Bitcoin traders pushed the Coinbase BTC premium to a six-week low, but demand from longer-term traders put a clear support under the range lows.&lt;/p&gt;</p>
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(60% 0.12 55)">02</span>
       <div class="item-body">
-        <h3><a href="https://cointelegraph.com/markets/bitcoin-traders-may-look-for-deeper-pullback-zones?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank">Data shows Bitcoin dip buyers waiting for lower prices: Is $70K BTC’s next stop?</a></h3>
-        <p>Bitcoin futures and orderbook data show dip buyers waiting for a BTC price drop below $70,000.</p>
-        <span class="item-src">CoinTelegraph</span>
+        <h3><a href="https://cointelegraph.com/news/missouri-attorney-general-lawsuit-coinflip-scams?utm_source=rss_feed&amp;utm_medium=rss&amp;utm_campaign=rss_partner_inbound" target="_blank">Missouri AG sues crypto ATM operator CoinFlip ‘for enabling scams’</a></h3>
+        <p>&lt;p style=&quot;float:right; margin:0 0 10px 15px; width:240px;&quot;&gt;&lt;img src=&quot;https://images.cointelegraph.com/images/528_aHR0cHM6Ly9zMy1pbWFnZXMuY3RtZWRpYS5pby9tZWRpYS9hcnRpY2xlLWNvdmVycy9qdWRnZS1sYXctY291cnQtMS5qcGc=.jpg&quot; alt=&quot;Missouri AG sues crypto ATM operator CoinFlip ‘for enabling scams’&quot; class=&quot;type:primaryImage&quot;&gt;&lt;/p&gt;&lt;p&gt;The lawsuit followed the launch of a December 2025 investigation by Missouri authorities into several crypto ATM companies, citing “deceptive fee structures” and scams.&lt;/p&gt;</p>
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(60% 0.12 55)">03</span>
       <div class="item-body">
-        <h3><a href="https://cointelegraph.com/news/bernstein-bitcoin-miners-gain-strategic-role-in-ai-infrastructure?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank">Bernstein: Bitcoin miners becoming critical suppliers in AI infrastructure</a></h3>
-        <p>Bernstein says miners control 27 GW of planned power and $90 billion in AI deals, giving them a strategic edge as electricity becomes the main constraint on data center growth.</p>
-        <span class="item-src">CoinTelegraph</span>
+        <h3><a href="https://cointelegraph.com/news/coinbase-powers-flipcash-stablecoin-launch-with-usdc-backed-usdf-on-solana?utm_source=rss_feed&amp;utm_medium=rss&amp;utm_campaign=rss_partner_inbound" target="_blank">Coinbase expands branded stablecoin infrastructure business with Flipcash USDF launch</a></h3>
+        <p>&lt;p style=&quot;float:right; margin:0 0 10px 15px; width:240px;&quot;&gt;&lt;img src=&quot;https://images.cointelegraph.com/images/528_aHR0cHM6Ly9zMy1pbWFnZXMuY3RtZWRpYS5pby9tZWRpYS9hcnRpY2xlLWNvdmVycy9oaS13aGF0LWlzLXRoZS1zdGFibGVjb2luLXRyaWxlbW1hLmpwZw==.jpg&quot; alt=&quot;Coinbase expands branded stablecoin infrastructure business with Flipcash USDF launch&quot; class=&quot;type:primaryImage&quot;&gt;&lt;/p&gt;&lt;p&gt;The launch marks Coinbase’s latest push into white-label stablecoin infrastructure for businesses building branded digital payment and settlement systems.&lt;/p&gt;</p>
+        <span class="item-src"></span>
       </div>
     </div>
 </div><div class="card">
@@ -314,25 +194,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.10 195)">01</span>
       <div class="item-body">
-        <h3><a href="https://www.cnbc.com/2026/05/19/treasurys-yields-inflation-traders-fed-interest-rates.html" target="_blank">30-year Treasury yield tops 5.19%, highest since before the financial crisis</a></h3>
-        <p>Global bond markets remained on edge as traders monitored central bank responses to renewed inflation fears.</p>
-        <span class="item-src">CNBC</span>
+        <h3><a href="https://www.marketwatch.com/story/elon-musk-in-a-post-on-x-says-some-of-his-trump-posts-went-too-far-and-that-he-regrets-them-90e73a6a?mod=mw_rss_realtimeheadlines" target="_blank">Elon Musk in a post on X says some of his Trump posts ‘went too far’ and that he regrets them</a></h3>
+        
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.10 195)">02</span>
       <div class="item-body">
-        <h3><a href="https://www.marketwatch.com/story/powell-says-labor-market-not-a-source-of-significant-inflation-pressure-cc3b1297?mod=mw_rss_realtimeheadlines" target="_blank">Powell says labor market not a source of significant inflation pressure</a></h3>
+        <h3><a href="https://www.marketwatch.com/story/bank-of-england-decision-on-thursday-will-be-at-12-02-p-m-local-time-instead-of-12-p-m-due-to-ve-day-two-minutes-of-silence-1f6bed66?mod=mw_rss_realtimeheadlines" target="_blank">Bank of England decision on Thursday will be at 12:02 p.m. local time instead of 12 p.m., due to VE Day’s two minutes of silence</a></h3>
         
-        <span class="item-src">MarketWatch</span>
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.10 195)">03</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNa01ySHJvR2J4d3NQamJPR1dlaERiMlZTdkNuNThXZFB3dDYwNTltZVdacjhuaDgwV3Y2ZkZPTGx6QnVWWFhMWHVMQjNib09ld21xLWw4ZUxXQk50WFg2MHRWQ2JRLVg3MUgyRW54dGRyOHlSd2dWTmJfUENocV9oaUpYbHpGR0nSAYwBQVVfeXFMT0lCSDJWeHZQSC1XTFBkVDlRclNDdGY2TkQwOUNBWkU3Wkc1OVFzMFVWb2llZENELWYxejhhU3VvSzFQOXZseDNlalFKNnBuVkg4Vi1UZkxmeGI5bFgwQW5MeExRd0ktMHlHaVZ3YzJBeEtlMWRlTXc4bGotdVRWc0s2anJNVEpKYi1ZTTY?oc=5" target="_blank">Eleições presidenciais e a Bolsa de Valores: volatilidade não irá faltar</a></h3>
+        <h3><a href="https://www.marketwatch.com/story/swiss-national-bank-cuts-interest-rates-by-a-half-point-to-0-5-ed1fce78?mod=mw_rss_realtimeheadlines" target="_blank">Swiss National Bank cuts interest rates by a half point to 0.5%</a></h3>
         
-        <span class="item-src">Estadão</span>
+        <span class="item-src"></span>
       </div>
     </div>
 </div><div class="card">
@@ -341,25 +221,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 25)">01</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE8wYXdPNEZCdHgwWGxXbDh2akwwOV90VDlLWUVKOGxyMHY1NDI1bk9ULWRadzNMYmtreWhYcE9pNnFRcHUxNkI5dHRXTmsxOU13cXpXRVRhNlNnVGR4QXVDVWlDdVQtNzZfNG9YMjFFN19iMVU?oc=5" target="_blank">A Guide to Every EV for Sale in the U.S. for 2026, from SUVs to Sports Cars and Trucks</a></h3>
-        
-        <span class="item-src">Car and Driver</span>
+        <h3><a href="https://www.motor1.com/news/796499/audi-a2-e-tron-testing-prototype/" target="_blank">Audi&#x27;s Weirdest Car Is Back On The Road Again: Video</a></h3>
+        <p>Before the new Audi A2 E-Tron debuts later this year, the company is testing its first prototypes.</p>
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 25)">02</span>
       <div class="item-body">
-        <h3><a href="https://www.motor1.com/news/796242/bmw-1-series-electric-rear-wheel-drive/" target="_blank">BMW's Smallest Car Will Be Rear-Wheel Drive Again</a></h3>
-        <p>But this time around, it won't have a combustion engine.</p>
-        <span class="item-src">Motor1</span>
+        <h3><a href="https://www.motor1.com/news/796478/ram-rumble-bee-no-auto-stop-start/" target="_blank">Ram&#x27;s New Super Truck Ditches One Very Annoying Feature</a></h3>
+        <p>You won&#x27;t find an automatic stop/start function on the new Ram Rumble Bee, thankfully.</p>
+        <span class="item-src"></span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 25)">03</span>
       <div class="item-body">
-        <h3><a href="https://www.motor1.com/news/796355/hyundai-fake-manual-transmission-patent/" target="_blank">Hyundai's Next Performance EV Could Have A Manual</a></h3>
-        <p>Hyundai has filed a patent for a new shift mechanism that can operate as like a traditional automatic transmission or a manual.</p>
-        <span class="item-src">Motor1</span>
+        <h3><a href="https://www.motor1.com/news/796474/2027-ram-1500-rumble-bee-horsepower-engine-specs-trims/" target="_blank">Ram&#x27;s New Super Truck Picks Up Where The SRT10 Left Off. Meet The Rumble Bee</a></h3>
+        <p>Instead of offering one high-powered extreme street truck, Ram plans to offer an entire range of them.</p>
+        <span class="item-src"></span>
       </div>
     </div>
 </div><div class="card">
@@ -368,25 +248,25 @@
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 142)">01</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxOa2ZWSUpQZkJJVEw5Zmx1ekRTcm1saHVTbWQ3QVVYcFlrNVFzRWdXMzZKcDBzbWNRaFgtZmJFeFA4Vk9DdFlrVWZqSUNKcWFOckk3dGdMWjJ2QnM4QkoxV0ZQS0pPUGUyZlNTUEdLcUNvMnlNNElYc0d3ampLZ0RSdlpQY2dZRjJYY0hPWlk5aUpUeDB1UER6dXp3d2tLNlFLNDFadDZMQUpxWnBmVkJ5YWZSQ1NxR2xDWk1XZnRaYUh6alAxc1c1UGF4a1LSAdoBQVVfeXFMUHNGWVZvaTFaU0V3SE1wa0pBTlUxQ0xwRVhhaUZWQXVVTk9UUEVGZWxGODZnT2NOLW5FTUVLMjFMa3dsSjJDR05oWlh2aFg2WEcyd0FoVTZmaHNSWEZzTnlHVUV4eU1xbHVQbFRyYVlXQVc3MGlUeUxpN3pLZmdJV1M3LTZDaVQ2aDNDS3paNWdveFBlU2F4c1ZmZ3JNbE5VVG81aXQ0cEw2WTJ0S01nTTNibUhEWWo0ZlEzZ2dwT2lYRDU3QUVKbE1oWVZhYzhVSHBpQVZHaG1xMkE?oc=5" target="_blank">Brazil At FIFA World Cup 2026: Neymar 'Will Be An Important Player' For Selecao - Ancelotti</a></h3>
-        
-        <span class="item-src">Outlook India</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxOWkQ5Z1VTSEpYNmtXTFJ3UFhjZC05UDZUSnBpZFNRcWp3aS1XUUNQWkpUMWRUaGw4NnM1UVFra2hJcXpDdDBxQWxncXloTlFLdnVmVGhRRHlvQkJidjVHenJQaWw2WmZUU3gtc0JDV25fRl9ZTHU5eWNUSEl6UmlrdGhkN2xKTzhYeDNDV1FVMTRUOHVwblRCM2hhMktYOVJUMWxBbDdLaFViWUNqVUMwLWpUUjhJd3ZQTkVQT1JHdFRYemVPWTZ0SlBLaks4YlVTczlJNmxiWjZoMG5JaGx5SV9hdGE1dFXSAfYBQVVfeXFMTmNSOHRueU1ZX0JiRVN4NU1Tb2w3dHd4WC1nWk1lbExFWFgyUGd6Z251Sk9ieENmWVFkZk16bU55RGkzbEVhMUFMOGk5ZWxfcWRCVWpDemNGZ3Badzg4T1F2Vk5ISGVRYkZXZXdzZDlVVS16alVuSVJvX0NTWTZuaUI2NFpPazBHaTcxZGI1dGxoWERkTG1tdzlyWUJ2bU5ldDZLSWpzZFhtb1NrdGVGWFNtR01zMUFZNU1qa3ZGT0wwRmNxeUhsLXFxMVJKazJCRzRrMGUyN19GX3ZzVXNCTGJjdVViVDRJVEpLbEFJT2NnaHNmTEJ3?oc=5" target="_blank">Convocados da Seleção para a Copa do Mundo: veja lista de Ancelotti - ge</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMi5wFBVV95cUxOWkQ5Z1VTSEpYNmtXTFJ3UFhjZC05UDZUSnBpZFNRcWp3aS1XUUNQWkpUMWRUaGw4NnM1UVFra2hJcXpDdDBxQWxncXloTlFLdnVmVGhRRHlvQkJidjVHenJQaWw2WmZUU3gtc0JDV25fRl9ZTHU5eWNUSEl6UmlrdGhkN2xKTzhYeDNDV1FVMTRUOHVwblRCM2hhMktYOVJUMWxBbDdLaFViWUNqVUMwLWpUUjhJd3ZQTkVQT1JHdFRYemVPWTZ0SlBLaks4YlVTczlJNmxiWjZoMG5JaGx5SV9hdGE1dFXSAfYBQVVfeXFMTmNSOHRueU1ZX0JiRVN4NU1Tb2w3dHd4WC1nWk1lbExFWFgyUGd6Z251Sk9ieENmWVFkZk16bU55RGkzbEVhMUFMOGk5ZWxfcWRCVWpDemNGZ3Badzg4T1F2Vk5ISGVRYkZXZXdzZDlVVS16alVuSVJvX0NTWTZuaUI2NFpPazBHaTcxZGI1dGxoWERkTG1tdzlyWUJ2bU5ldDZLSWpzZFhtb1NrdGVGWFNtR01zMUFZNU1qa3ZGT0wwRmNxeUhsLXFxMVJKazJCRzRrMGUyN19GX3ZzVXNCTGJjdVViVDRJVEpLbEFJT2NnaHNmTEJ3?oc=5&quot; target=&quot;_blank&quot;&gt;Convocados da Seleção para a Copa do Mundo: veja lista de Ancelotti&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;ge&lt;/font&gt;</p>
+        <span class="item-src">ge</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 142)">02</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxOWkQ5Z1VTSEpYNmtXTFJ3UFhjZC05UDZUSnBpZFNRcWp3aS1XUUNQWkpUMWRUaGw4NnM1UVFra2hJcXpDdDBxQWxncXloTlFLdnVmVGhRRHlvQkJidjVHenJQaWw2WmZUU3gtc0JDV25fRl9ZTHU5eWNUSEl6UmlrdGhkN2xKTzhYeDNDV1FVMTRUOHVwblRCM2hhMktYOVJUMWxBbDdLaFViWUNqVUMwLWpUUjhJd3ZQTkVQT1JHdFRYemVPWTZ0SlBLaks4YlVTczlJNmxiWjZoMG5JaGx5SV9hdGE1dFXSAfYBQVVfeXFMTmNSOHRueU1ZX0JiRVN4NU1Tb2w3dHd4WC1nWk1lbExFWFgyUGd6Z251Sk9ieENmWVFkZk16bU55RGkzbEVhMUFMOGk5ZWxfcWRCVWpDemNGZ3Badzg4T1F2Vk5ISGVRYkZXZXdzZDlVVS16alVuSVJvX0NTWTZuaUI2NFpPazBHaTcxZGI1dGxoWERkTG1tdzlyWUJ2bU5ldDZLSWpzZFhtb1NrdGVGWFNtR01zMUFZNU1qa3ZGT0wwRmNxeUhsLXFxMVJKazJCRzRrMGUyN19GX3ZzVXNCTGJjdVViVDRJVEpLbEFJT2NnaHNmTEJ3?oc=5" target="_blank">Convocados da Seleção para a Copa do Mundo: veja lista de Ancelotti</a></h3>
-        
-        <span class="item-src">ge</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxPN2R5RUNHVl9aR3JzMmpwSVdQdnZrZG90a0ZHSFZfX3dfUHBtRjBoYmxrNDJvZVMzSlI4REhZLTdxdVQ2VFg0cWZib3ZNbXRJMUpfUWN3R25KSXBNS0VldXFreUt1N2RjeGVocm5zQWU5dXRhb05PYkwxYjJoLXZDbER4UUdSQTFWZGM0MFY2clM5alE4cWNZR1lhcklWVEJ6d1hmZG1ubllTd0tXUzVRa2Q1MjF3UWZUTEJkVnRZckVvclA3NWN1d19pWGpfM2JEU01ZbUVOSUFKZWtyNGNGNUYzOA?oc=5" target="_blank">Carlo Ancelotti convoca os 26 jogadores que vão tentar o hexa na Copa do Mundo - CBF</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMi4wFBVV95cUxPN2R5RUNHVl9aR3JzMmpwSVdQdnZrZG90a0ZHSFZfX3dfUHBtRjBoYmxrNDJvZVMzSlI4REhZLTdxdVQ2VFg0cWZib3ZNbXRJMUpfUWN3R25KSXBNS0VldXFreUt1N2RjeGVocm5zQWU5dXRhb05PYkwxYjJoLXZDbER4UUdSQTFWZGM0MFY2clM5alE4cWNZR1lhcklWVEJ6d1hmZG1ubllTd0tXUzVRa2Q1MjF3UWZUTEJkVnRZckVvclA3NWN1d19pWGpfM2JEU01ZbUVOSUFKZWtyNGNGNUYzOA?oc=5&quot; target=&quot;_blank&quot;&gt;Carlo Ancelotti convoca os 26 jogadores que vão tentar o hexa na Copa do Mundo&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;CBF&lt;/font&gt;</p>
+        <span class="item-src">CBF</span>
       </div>
     </div>
     <div class="item">
       <span class="item-n" style="color:oklch(56% 0.13 142)">03</span>
       <div class="item-body">
-        <h3><a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxPMjAxQ3I4R1lKTnhnTHBnbDlLa1BBVTJwbHg5Z3lGa1hUbUZCaTZwUTRDSUpna09qRC1taGpvWFVsVDNueTFMRzVtSjhkbmZaa3QtWDV3dEh0eUFOX1BfcWV4eDNROGI2S2Q3VGVhY1BHQXVGWEJBblhMb0RKUUdFZTc1TnJHOFhfQzZHdzR6NURUS25rRTZ2ejJZWlJSLThWcXlvaHJteEM1Rm5iYldBc0VtS0wtdXdIRnJWYkV2WlRJT3RVclBYaXhKcnZ3MXpDdWhDSkNOX09YenVsOEdMMTNSV1c?oc=5" target="_blank">Milhões de brasileiros vão viajar para a Copa do Mundo 2026; confira dados da pesquisa</a></h3>
-        
-        <span class="item-src">JC</span>
+        <h3><a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxQOG15bFhaMlNxQ2ktSG9xTlNrd04wem91Tk5mdTN0T2ZDcmN6MWZtdWMzQXdVME5fOXZYcGhjbnZDaTJMeV95N0xzRzdJSnAwUnhDQkYxWXlJT21uX0QzUDNnMlhELXpVendFMEpwbF82Q2Fab0xGVGFIZEk1aThJeVVNYmxPdHpZQnpHLUNFVlM1V21VTGxfaXRWVTFlTUZ3Y1dMeTFvbENicUtuUkQ1Ry1fdHU5aUhaZmE5a0hvQUZOZ3ZaVzR1Qw?oc=5" target="_blank">Convocação de Neymar para a Copa não surpreende, dizem analistas - CNN Brasil</a></h3>
+        <p>&lt;a href=&quot;https://news.google.com/rss/articles/CBMiyAFBVV95cUxQOG15bFhaMlNxQ2ktSG9xTlNrd04wem91Tk5mdTN0T2ZDcmN6MWZtdWMzQXdVME5fOXZYcGhjbnZDaTJMeV95N0xzRzdJSnAwUnhDQkYxWXlJT21uX0QzUDNnMlhELXpVendFMEpwbF82Q2Fab0xGVGFIZEk1aThJeVVNYmxPdHpZQnpHLUNFVlM1V21VTGxfaXRWVTFlTUZ3Y1dMeTFvbENicUtuUkQ1Ry1fdHU5aUhaZmE5a0hvQUZOZ3ZaVzR1Qw?oc=5&quot; target=&quot;_blank&quot;&gt;Convocação de Neymar para a Copa não surpreende, dizem analistas&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#6f6f6f&quot;&gt;CNN Brasil&lt;/font&gt;</p>
+        <span class="item-src">CNN Brasil</span>
       </div>
     </div>
 </div>

@@ -5,13 +5,14 @@ Fetches RSS (6 categories) + BTC price, generates index.html, pushes to GitHub P
 """
 
 import json
+import re
 import subprocess
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
-from html import escape
+from html import escape, unescape
 
 REPO_DIR = Path(__file__).parent
 OUT_FILE = REPO_DIR / "index.html"
@@ -139,8 +140,19 @@ CSS = """
   .world-section { margin-top: 28px; }
 
   @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .grid-2, .grid-4 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    body { padding: 16px 14px 40px; }
+    header { flex-direction: column; gap: 4px; }
+    .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  }
 """
+
+
+def strip_html(text: str) -> str:
+    text = unescape(text)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
 
 
 def log(msg: str) -> None:
@@ -208,7 +220,8 @@ def render_item(item: dict, idx: int, num_color: str) -> str:
     title = escape(item["title"])
     link  = escape(item["link"])
     src   = escape(item["src"])
-    desc_html = f'<p>{escape(item["desc"])}</p>' if item.get("desc") else ""
+    desc_raw = strip_html(item["desc"]) if item.get("desc") else ""
+    desc_html = f'<p>{escape(desc_raw)}</p>' if desc_raw else ""
     return (
         f'    <div class="item">\n'
         f'      <span class="item-n" style="color:{num_color}">{idx:02d}</span>\n'

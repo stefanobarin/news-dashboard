@@ -41,4 +41,4 @@ A Python script fetches RSS feeds across 6 categories, grabs a live BTC price, a
             └── git push → GitHub Pages
 ```
 
-The generator script is just local on mac 
+
